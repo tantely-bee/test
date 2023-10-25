@@ -33,7 +33,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>vidaa</th>
+            <th>rask</th>
             <th>Description</th>
             <th>Crée le</th>
             <th>Action</th>
