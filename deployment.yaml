@@ -20,7 +20,7 @@ spec:
       spec:
        containers:
         - name: webapp
-          image: ranjarat/webapp
+          image: ranjarat/webtest
           imagePullPolicy: Always
           ports:
           - containerPort: 80

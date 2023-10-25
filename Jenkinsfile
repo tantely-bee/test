@@ -1,10 +1,10 @@
 pipeline{
     agent any
     environment{
-        PROJECT_ID = 'boxwood-destiny-401815'
+        PROJECT_ID = 'white-berm-402808'
         CLUSTER_NAME = 'autopilot-cluster'
-        LOCATION = 'asia-east1-a'
-        CREDENTIALS_ID = '89d535d3-12ce-47ba-9d62-cd51c2ea692f'
+        LOCATION = 'europe-central2-a'
+        CREDENTIALS_ID = 'ed421869-ce00-4690-9a67-0c654afe7761'
     }
 
     stages{
@@ -17,7 +17,7 @@ pipeline{
         stage('Building image'){
             steps{
                 script{
-                    webapp = docker.build("ranjarat/webapp:0.${env.BUILD_ID}")
+                    webapp = docker.build("ranjarat/webtest:0.${env.BUILD_ID}")
                 }
             }
         }
@@ -35,11 +35,11 @@ pipeline{
 
          stage('Deploy to GKE'){
             steps{
-                sh "sed -i 's/webapp:latest/webapp:0.${env.BUILD_ID}/g' deployment.yaml"
+                sh "sed -i 's/webtest:latest/webtest:0.${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-                sh 'gcloud auth login --quiet --cred-file=/home/tatelrazafimahefa/test.json'
-                sh 'gcloud container clusters get-credentials autopilot-cluster --region asia-east1-a --project boxwood-destiny-401815'
-                sh 'kubectl set image deployment webapp webapp=ranjarat/webapp:latest'
+                sh 'gcloud auth login --quiet --cred-file=/home/tsirynantenaina18/auth.json'
+                sh 'gcloud container clusters get-credentials autopilot-cluster --region europe-central2-a --project white-berm-402808'
+                sh 'kubectl set image deployment webapp webapp=ranjarat/webtest:latest'
             }
         }
     }

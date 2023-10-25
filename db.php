@@ -2,7 +2,7 @@
 session_start();
 
 $conn = mysqli_connect(
-  '34.129.197.10',
+  '34.41.71.229',
   'root',
   'root',
   'php_mysql_crud'
