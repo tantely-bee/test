@@ -3,7 +3,7 @@ pipeline{
     environment{
         PROJECT_ID = 'white-berm-402808'
         CLUSTER_NAME = 'autopilot-cluster'
-        LOCATION = 'southamerica-west1-b	'
+        LOCATION = 'northamerica-northeast1-a'
         CREDENTIALS_ID = 'ed421869-ce00-4690-9a67-0c654afe7761'
     }
 
@@ -38,7 +38,7 @@ pipeline{
                 sh "sed -i 's/webtest:latest/webtest:0.${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                 sh 'gcloud auth login --quiet --cred-file=/home/tsirynantenaina18/auth.json'
-                sh 'gcloud container clusters get-credentials autopilot-cluster --zone southamerica-west1-b --project white-berm-402808'
+                sh 'gcloud container clusters get-credentials autopilot-cluster --zone northamerica-northeast1-a --project white-berm-402808'
                 sh 'kubectl set image deployment webapp webapp=ranjarat/webtest:latest'
             }
         }
