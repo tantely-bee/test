@@ -38,7 +38,7 @@ pipeline{
                 sh "sed -i 's/webtest:latest/webtest:0.${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                 sh 'gcloud auth login --quiet --cred-file=/home/tsirynantenaina18/auth.json'
-                sh 'gcloud container clusters get-credentials cluster --zone northamerica-northeast1-a --project white-berm-402808'
+                sh 'gcloud container clusters get-credentials cluster --zone us-central1-c --project white-berm-402808'
                 sh 'kubectl set image deployment webapp webapp=ranjarat/webtest:latest'
             }
         }
