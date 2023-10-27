@@ -34,7 +34,7 @@
         <thead>
           <tr>
             <th>rask</th>
-            <th>Description</th>
+            <th>Descrxxiption</th>
             <th>Crée le</th>
             <th>Action</th>
           </tr>
