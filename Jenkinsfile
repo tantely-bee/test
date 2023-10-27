@@ -2,8 +2,8 @@ pipeline{
     agent any
     environment{
         PROJECT_ID = 'white-berm-402808'
-        CLUSTER_NAME = 'autopilot-cluster'
-        LOCATION = 'northamerica-northeast1-a'
+        CLUSTER_NAME = 'cluster'
+        LOCATION = 'us-central1-c'
         CREDENTIALS_ID = 'ed421869-ce00-4690-9a67-0c654afe7761'
     }
 
