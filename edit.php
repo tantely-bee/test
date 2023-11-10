@@ -21,7 +21,7 @@ if (isset($_POST['update'])) {
 
   $query = "UPDATE task set title = '$title', description = '$description' WHERE id=$id";
   mysqli_query($conn, $query);
-  $_SESSION['message'] = 'Task Updated Successfully';
+  $_SESSION['message'] = 'Task Mis à jour';
   $_SESSION['message_type'] = 'warning';
   header('Location: index.php');
 }
