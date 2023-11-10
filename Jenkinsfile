@@ -3,7 +3,7 @@ pipeline{
     environment{
         PROJECT_ID = 'white-berm-402808'
         CLUSTER_NAME = 'cluster'
-        LOCATION = 'us-central1-c'
+        LOCATION = 'australia-southeast2-a'
         CREDENTIALS_ID = 'ed421869-ce00-4690-9a67-0c654afe7761'
     }
 
@@ -36,9 +36,10 @@ pipeline{
          stage('Deploy to GKE'){
             steps{
                 sh "sed -i 's/webtest:latest/webtest:0.${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, 
+                location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                 sh 'gcloud auth login --quiet --cred-file=/home/tsirynantenaina18/auth.json'
-                sh 'gcloud container clusters get-credentials cluster --zone us-central1-c --project white-berm-402808'
+                sh 'gcloud container clusters get-credentials cluster --zone australia-southeast2-a --project white-berm-402808'
                 sh 'kubectl set image deployment webapp webapp=ranjarat/webtest:latest'
             }
         }
